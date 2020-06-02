@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: ocvwlym0zv3tcn68.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
--- Generation Time: May 25, 2020 at 12:55 AM
+-- Generation Time: May 27, 2020 at 05:28 AM
 -- Server version: 5.7.23-log
 -- PHP Version: 7.4.5
 
@@ -208,6 +208,13 @@ CREATE TABLE `Medication` (
   `name` text COLLATE utf8_unicode_ci NOT NULL,
   `cost` decimal(7,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `Medication`
+--
+
+INSERT INTO `Medication` (`MedicationID`, `name`, `cost`) VALUES
+(2, 'med111', '100.00');
 
 --
 -- Triggers `Medication`
@@ -526,6 +533,17 @@ CREATE TABLE `Ward` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Dumping data for table `Ward`
+--
+
+INSERT INTO `Ward` (`WardID`, `name`, `location`, `capacity`) VALUES
+(5, 'Joel2', 'Room333', 7),
+(6, 'Joel', 'Room666', 8),
+(7, 'Joel5', 'Room444', 9),
+(8, 'test101', 'Room444', 9),
+(9, 'name1', 'location1', 5);
+
+--
 -- Triggers `Ward`
 --
 DELIMITER $$
@@ -648,6 +666,9 @@ ALTER TABLE `Ward`
 ALTER TABLE `Admission`
   MODIFY `AdmissionID` int(11) NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE `Patient`
+  MODIFY `PatientID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `Allocation`
 --
@@ -664,7 +685,7 @@ ALTER TABLE `Doctor`
 -- AUTO_INCREMENT for table `Medication`
 --
 ALTER TABLE `Medication`
-  MODIFY `MedicationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `MedicationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `Payment`
@@ -694,7 +715,7 @@ ALTER TABLE `Researchtopic`
 -- AUTO_INCREMENT for table `Ward`
 --
 ALTER TABLE `Ward`
-  MODIFY `WardID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `WardID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
