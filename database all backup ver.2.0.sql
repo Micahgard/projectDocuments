@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: ocvwlym0zv3tcn68.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
--- Generation Time: May 27, 2020 at 05:28 AM
+-- Generation Time: Jun 09, 2020 at 06:02 AM
 -- Server version: 5.7.23-log
 -- PHP Version: 7.4.5
 
@@ -24,6 +24,34 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Admin`
+--
+
+CREATE TABLE `Admin` (
+  `AdminID` int(11) NOT NULL,
+  `username` text COLLATE utf8_unicode_ci NOT NULL,
+  `password` text COLLATE utf8_unicode_ci NOT NULL,
+  `email` text COLLATE utf8_unicode_ci NOT NULL,
+  `phone` text COLLATE utf8_unicode_ci NOT NULL,
+  `role` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `Admin`
+--
+
+INSERT INTO `Admin` (`AdminID`, `username`, `password`, `email`, `phone`, `role`) VALUES
+(1, 'sarah', 'admin', 'sarah@gmail.com', '0211111111', 'senior'),
+(2, 'micah', 'admin', 'micah@gmail.com', '0212222222', 'assistant'),
+(3, 'joel', 'admin', 'joel@gmail.com', '0213333333', 'assistant'),
+(4, 'mojeeb', 'admin', 'mojeeb@gmail.com', '0214444444', 'facility'),
+(5, 'aaron', 'admin', 'aaron@gmail.com', '0215555555', 'clerk'),
+(6, 'jason', 'admin', 'jason@gmail.com', '0216666666', 'research'),
+(7, 'zaid', 'admin', 'zaid@gmail.com', '0217777777', 'pharmacy');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Admission`
 --
 
@@ -35,6 +63,15 @@ CREATE TABLE `Admission` (
   `patientID` int(11) NOT NULL,
   `wardID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `Admission`
+--
+
+INSERT INTO `Admission` (`AdmissionID`, `description`, `admissiondate`, `status`, `patientID`, `wardID`) VALUES
+(1, 'chest pain', '2020-03-06', 'complete', 4, 10),
+(2, 'head trauma', '2020-04-03', 'current', 7, 12),
+(6, 'heart murmur', '2020-05-03', 'current', 11, 16);
 
 --
 -- Triggers `Admission`
@@ -74,12 +111,21 @@ DELIMITER ;
 --
 
 CREATE TABLE `Allocation` (
-  `AllowcationID` int(11) NOT NULL,
+  `AllocationID` int(11) NOT NULL,
   `fee` decimal(8,2) NOT NULL,
   `role` text COLLATE utf8_unicode_ci NOT NULL,
   `doctorID` int(11) NOT NULL,
   `admissionID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `Allocation`
+--
+
+INSERT INTO `Allocation` (`AllocationID`, `fee`, `role`, `doctorID`, `admissionID`) VALUES
+(6, '50.00', 'primary', 36, 2),
+(7, '25.00', 'secondary', 42, 2),
+(10, '200.00', 'primary', 40, 1);
 
 --
 -- Triggers `Allocation`
@@ -126,13 +172,38 @@ CREATE TABLE `Doctor` (
   `suburb` text COLLATE utf8_unicode_ci NOT NULL,
   `city` text COLLATE utf8_unicode_ci NOT NULL,
   `phone` text COLLATE utf8_unicode_ci NOT NULL,
-  `specialty` text COLLATE utf8_unicode_ci NOT NULL,
+  `speciality` text COLLATE utf8_unicode_ci NOT NULL,
   `salary` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Dumping data for table `Doctor`
+--
+
+INSERT INTO `Doctor` (`DoctorID`, `lastname`, `firstname`, `street`, `suburb`, `city`, `phone`, `speciality`, `salary`) VALUES
+(35, 'Plant', 'Robert', '92 Pole Lane', 'Mt Roskill', 'Auckland', '0272225631', 'Critical Care', '104000.00'),
+(36, 'Page', 'James', '56 Avon Street', 'Mt Albert', 'Auckland', '0272145467', 'Haematology', '124200.00'),
+(37, 'Cook', 'Samuel', '78 St John Lane', 'Avondale', 'Auckland', '0273457121', 'Neurology', '125000.00'),
+(38, 'Green', 'Rodney', '94 North Road', 'Mt Albert', 'Auckland', '0272225341', 'Oncology', '134150.00'),
+(39, 'Jones', 'William', '55 James Street', 'Fitzroy', 'Auckland', '0272123467', 'Cardiology', '133000.00'),
+(40, 'Bonham', 'Frederick', '67 Arrow Street', 'Lynfield', 'Auckland', '0278811441', 'Critical Care', '120000.00'),
+(41, 'Cornwell', 'Jean', '45 Moon Avenue', 'Avondale', 'Auckland', '0276688112', 'Dermatology', '133000.00'),
+(42, 'Jones', 'Samantha', '25 Jade Lane', 'Glen Eden', 'Auckland', '0273434666', 'Cardiology ', '140000.00'),
+(44, 'King', 'Bill', '54 avon street', 'mt Albert', 'Auckland', '0271234567', 'Haematology', '122400.00'),
+(45, 'cook', 'samual', '78 st john lane', 'avondale', 'auckland', '0273456121', 'neurology', '125000.00');
+
+--
 -- Triggers `Doctor`
 --
+DELIMITER $$
+CREATE TRIGGER `doctor_city_empty` BEFORE INSERT ON `Doctor` FOR EACH ROW BEGIN 
+IF NEW.city = "" THEN 
+ SIGNAL SQLSTATE '12345'
+SET MESSAGE_TEXT = 'city is empty';
+ END IF; 
+ END
+$$
+DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `doctor_firstname_empty` BEFORE INSERT ON `Doctor` FOR EACH ROW BEGIN 
 IF NEW.firstname = "" THEN 
@@ -147,6 +218,15 @@ CREATE TRIGGER `doctor_lastname_empty` BEFORE INSERT ON `Doctor` FOR EACH ROW BE
 IF NEW.lastname = "" THEN 
  SIGNAL SQLSTATE '12345'
 SET MESSAGE_TEXT = 'lastname is empty';
+ END IF; 
+ END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `doctor_phone_empty` BEFORE INSERT ON `Doctor` FOR EACH ROW BEGIN 
+IF NEW.phone = "" THEN 
+ SIGNAL SQLSTATE '12345'
+SET MESSAGE_TEXT = 'phone is empty';
  END IF; 
  END
 $$
@@ -214,7 +294,18 @@ CREATE TABLE `Medication` (
 --
 
 INSERT INTO `Medication` (`MedicationID`, `name`, `cost`) VALUES
-(2, 'med111', '100.00');
+(2, 'medication102', '500.00'),
+(3, 'medication1', '100.00'),
+(4, 'medication2', '1000.00'),
+(6, 'Ibuprofen 200mg', '6.00'),
+(7, 'Paracetamol 200mg', '6.50'),
+(8, 'Prochlorperazine maleate 5mg', '5.00'),
+(9, 'Aspirin 200mg', '4.50'),
+(10, 'Eye Drops', '5.50'),
+(11, 'Ear Drops', '7.50'),
+(12, 'Nasal Spray', '4.50'),
+(13, 'Codeine 200mg', '7.50'),
+(14, 'VitaminC', '20.00');
 
 --
 -- Triggers `Medication`
@@ -264,6 +355,23 @@ CREATE TABLE `Patient` (
   `phone` text COLLATE utf8_unicode_ci NOT NULL,
   `insurcode` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `Patient`
+--
+
+INSERT INTO `Patient` (`PatientID`, `lastname`, `firstname`, `street`, `suburb`, `city`, `email`, `phone`, `insurcode`) VALUES
+(4, 'Fane', 'Andrew', '12 Queen Street', 'Mt Albert', 'Auckland', 'andrewfane@xtra.co.nz', '0211131122', 'ASB3432'),
+(5, 'Burke', 'Andrew', '34 Jade Street', 'Glen Eden', 'Auckland', 'andrewburke@xtra.co.nz', '0211114122', 'ASB5687'),
+(6, 'Ripley', 'Ellen', '45 Reeves Lane', 'Glen Eden', 'Auckland', 'ellenripley@xtra.co.nz', '0211121122', 'NZB6521'),
+(7, 'Shames', 'Ian', '52 Green Lane', 'Mt Roskill', 'Auckland', 'ianshames@xtra.co.nz', '0211221122', 'TSB4576'),
+(8, 'King', 'Sarah', '14 Roper Street', 'Avondale', 'Auckland', 'sarahking@xtra.co.nz', '0211114122', 'ASB6515'),
+(9, 'Fane', 'Eva', '65 Falls Road', 'Avondale', 'Auckland', 'evafane@xtra.co.nz', '0211111199', 'WPB4566'),
+(10, 'Freemen', 'Anthony', '86 Line Road', 'Mt Albert', 'Auckland', 'tonyfreemen@xtra.co.nz', '0211144133', 'ASB8811'),
+(11, 'Grey', 'Isabella', '23 King Street', 'Lynnfield', 'Auckland', 'isabellagrey@xtra.co.nz', '0211111166', 'NZB5511'),
+(12, 'Heath', 'Joseph', '123 Queen Street', 'Mt Albert', 'Auckland', 'josephheath@xtra.co.nz', '0211141188', 'WPB5512'),
+(13, 'King', 'Peter', '120 Queen ST', 'CBD', 'Auckland', 'peterking@gmail.com', '0212223333', 'ASB1234'),
+(14, 'Li', 'Henry', '123 Queen ST', 'CBD', 'Auckland', 'henryli@gmail.com', '0223345567', '');
 
 --
 -- Triggers `Patient`
@@ -346,6 +454,15 @@ CREATE TABLE `Payment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Dumping data for table `Payment`
+--
+
+INSERT INTO `Payment` (`PaymentCode`, `paymentdate`, `amount`, `admissionID`) VALUES
+(1, '2020-03-08', '20.00', 1),
+(2, '2020-03-17', '25.00', 1),
+(4, '2020-05-08', '60.50', 6);
+
+--
 -- Triggers `Payment`
 --
 DELIMITER $$
@@ -386,9 +503,18 @@ CREATE TABLE `Prescription` (
   `PrescriptionID` int(11) NOT NULL,
   `prescriptiondate` date NOT NULL,
   `amount` decimal(6,2) NOT NULL,
-  `medicationID` int(11) NOT NULL,
-  `admissionID` int(11) NOT NULL
+  `admissionID` int(11) NOT NULL,
+  `medicationID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `Prescription`
+--
+
+INSERT INTO `Prescription` (`PrescriptionID`, `prescriptiondate`, `amount`, `admissionID`, `medicationID`) VALUES
+(1, '2020-03-06', '5.00', 1, 8),
+(2, '2020-03-07', '6.50', 1, 7),
+(3, '2020-04-13', '6.50', 2, 7);
 
 --
 -- Triggers `Prescription`
@@ -429,12 +555,21 @@ DELIMITER ;
 
 CREATE TABLE `Researchproject` (
   `ProjectID` int(11) NOT NULL,
-  `doctorID` int(11) NOT NULL,
-  `topicID` int(11) NOT NULL,
   `enddate` date NOT NULL,
   `outcome` text COLLATE utf8_unicode_ci NOT NULL,
-  `budget` decimal(10,2) NOT NULL
+  `budget` decimal(10,2) NOT NULL,
+  `doctorID` int(11) NOT NULL,
+  `topicID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `Researchproject`
+--
+
+INSERT INTO `Researchproject` (`ProjectID`, `enddate`, `outcome`, `budget`, `doctorID`, `topicID`) VALUES
+(1, '2020-06-01', 'journal article', '2000.00', 35, 5),
+(2, '2020-06-02', 'book chapter', '5000.00', 36, 7),
+(3, '2020-06-03', 'conference paper', '3500.00', 37, 8);
 
 --
 -- Triggers `Researchproject`
@@ -489,6 +624,20 @@ CREATE TABLE `Researchtopic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Dumping data for table `Researchtopic`
+--
+
+INSERT INTO `Researchtopic` (`TopicID`, `description`, `level`) VALUES
+(1, 'Addictions', 4),
+(2, 'Pandemics', 5),
+(3, 'Allergies', 1),
+(4, 'Diabetes', 5),
+(5, 'Pain and pain relief', 3),
+(6, 'Cardiovascular', 7),
+(7, 'Viral oncology', 4),
+(8, 'Lymphoma', 2);
+
+--
 -- Triggers `Researchtopic`
 --
 DELIMITER $$
@@ -537,11 +686,14 @@ CREATE TABLE `Ward` (
 --
 
 INSERT INTO `Ward` (`WardID`, `name`, `location`, `capacity`) VALUES
-(5, 'Joel2', 'Room333', 7),
-(6, 'Joel', 'Room666', 8),
-(7, 'Joel5', 'Room444', 9),
-(8, 'test101', 'Room444', 9),
-(9, 'name1', 'location1', 5);
+(10, 'Apollo', 'Floor 1', 20),
+(11, 'Artemis', 'Floor 1', 18),
+(12, 'Athena', 'Floor 1', 16),
+(13, 'Chelsea', 'Floor 2', 20),
+(14, 'Burns', 'Floor 3', 12),
+(15, 'Cardiology', 'Floor 2', 18),
+(16, 'Superman', 'Floor 4', 10),
+(17, 'Spiderman', 'Floor 5', 15);
 
 --
 -- Triggers `Ward`
@@ -588,6 +740,12 @@ DELIMITER ;
 --
 
 --
+-- Indexes for table `Admin`
+--
+ALTER TABLE `Admin`
+  ADD PRIMARY KEY (`AdminID`);
+
+--
 -- Indexes for table `Admission`
 --
 ALTER TABLE `Admission`
@@ -599,7 +757,7 @@ ALTER TABLE `Admission`
 -- Indexes for table `Allocation`
 --
 ALTER TABLE `Allocation`
-  ADD PRIMARY KEY (`AllowcationID`),
+  ADD PRIMARY KEY (`AllocationID`),
   ADD KEY `doctorID` (`doctorID`),
   ADD KEY `admissionID` (`admissionID`);
 
@@ -661,61 +819,70 @@ ALTER TABLE `Ward`
 --
 
 --
+-- AUTO_INCREMENT for table `Admin`
+--
+ALTER TABLE `Admin`
+  MODIFY `AdminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `Admission`
 --
 ALTER TABLE `Admission`
-  MODIFY `AdmissionID` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `Patient`
-  MODIFY `PatientID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `AdmissionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `Allocation`
 --
 ALTER TABLE `Allocation`
-  MODIFY `AllowcationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `AllocationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `Doctor`
 --
 ALTER TABLE `Doctor`
-  MODIFY `DoctorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `DoctorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `Medication`
 --
 ALTER TABLE `Medication`
-  MODIFY `MedicationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `MedicationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `Patient`
+--
+ALTER TABLE `Patient`
+  MODIFY `PatientID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `Payment`
 --
 ALTER TABLE `Payment`
-  MODIFY `PaymentCode` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PaymentCode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `Prescription`
 --
 ALTER TABLE `Prescription`
-  MODIFY `PrescriptionID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PrescriptionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `Researchproject`
 --
 ALTER TABLE `Researchproject`
-  MODIFY `ProjectID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ProjectID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `Researchtopic`
 --
 ALTER TABLE `Researchtopic`
-  MODIFY `TopicID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `TopicID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `Ward`
 --
 ALTER TABLE `Ward`
-  MODIFY `WardID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `WardID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
