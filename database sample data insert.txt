@@ -1,0 +1,69 @@
+insert into `Ward` (`name`, `location`, `capacity`) values ('Apollo', 'Floor 1', 20);
+insert into `Ward` (`name`, `location`, `capacity`) values ('Artemis', 'Floor 1', 18);
+insert into `Ward` (`name`, `location`, `capacity`) values ('Athena', 'Floor 1', 16);
+insert into `Ward` (`name`, `location`, `capacity`) values ('Chelsea', 'Floor 2', 20);
+insert into `Ward` (`name`, `location`, `capacity`) values ('Burns', 'Floor 3', 12);
+insert into `Ward` (`name`, `location`, `capacity`) values ('Cardiology', 'Floor 2', 18);
+
+insert into `Patient` (`lastname`, `firstname`, `street`, `suburb`, `city`, `email`, `phone`, `insurcode`) values ('Fane', 'Andrew', '12 Queen Street', 'Mt Albert', 'Auckland', 'andrewfane@xtra.co.nz', '0211131122', 'ASB3432');
+insert into `Patient` (`lastname`, `firstname`, `street`, `suburb`, `city`, `email`, `phone`, `insurcode`) values ('Burke', 'Andrew', '34 Jade Street', 'Glen Eden', 'Auckland', 'andrewburke@xtra.co.nz', '0211114122', 'ASB5687');
+insert into `Patient` (`lastname`, `firstname`, `street`, `suburb`, `city`, `email`, `phone`, `insurcode`) values ('Ripley', 'Ellen', '45 Reeves Lane', 'Glen Eden', 'Auckland', 'ellenripley@xtra.co.nz', '0211121122', 'NZB6521');
+insert into `Patient` (`lastname`, `firstname`, `street`, `suburb`, `city`, `email`, `phone`, `insurcode`) values ('Shames', 'Ian', '52 Green Lane', 'Mt Roskill', 'Auckland', 'ianshames@xtra.co.nz', '0211221122', 'TSB4576');
+insert into `Patient` (`lastname`, `firstname`, `street`, `suburb`, `city`, `email`, `phone`, `insurcode`) values ('King', 'Sarah', '14 Roper Street', 'Avondale', 'Auckland', 'sarahking@xtra.co.nz', '0211114122', 'ASB6515');
+insert into `Patient` (`lastname`, `firstname`, `street`, `suburb`, `city`, `email`, `phone`, `insurcode`) values ('Fane', 'Eva', '65 Falls Road', 'Avondale', 'Auckland', 'evafane@xtra.co.nz', '0211111199', 'WPB4566');
+insert into `Patient` (`lastname`, `firstname`, `street`, `suburb`, `city`, `email`, `phone`, `insurcode`) values ('Freemen', 'Anthony', '86 Line Road', 'Mt Albert', 'Auckland', 'tonyfreemen@xtra.co.nz', '0211144133', 'ASB8811');
+insert into `Patient` (`lastname`, `firstname`, `street`, `suburb`, `city`, `email`, `phone`, `insurcode`) values ('Grey', 'Isabella', '23 King Street', 'Lynnfield', 'Auckland', 'isabellagrey@xtra.co.nz', '0211111166', 'NZB5511');
+insert into `Patient` (`lastname`, `firstname`, `street`, `suburb`, `city`, `email`, `phone`, `insurcode`) values ('Heath', 'Joseph', '123 Queen Street', 'Mt Albert', 'Auckland', 'josephheath@xtra.co.nz', '0211141188', 'WPB5512');
+
+insert into `Doctor` (`lastname`, `firstname`, `street`, `suburb`, `city`, `phone`, `specialty`, `salary`) values ('Plant', 'Robert', '92 Pole Lane', 'Mt Roskill', 'Auckland', '0272225631', 'Critical Care', 104000.00);
+insert into `Doctor` (`lastname`, `firstname`, `street`, `suburb`, `city`, `phone`, `specialty`, `salary`) values ('Page', 'James', '56 Avon Street', 'Mt Albert', 'Auckland', '0272145467', 'Haematology', 124200.00);
+insert into `Doctor` (`lastname`, `firstname`, `street`, `suburb`, `city`, `phone`, `specialty`, `salary`) values ('Cook', 'Samuel', '78 St John Lane', 'Avondale', 'Auckland', '0273457121', 'Neurology', 125000.00);
+insert into `Doctor` (`lastname`, `firstname`, `street`, `suburb`, `city`, `phone`, `specialty`, `salary`) values ('Green', 'Rodney', '94 North Road', 'Mt Albert', 'Auckland', '0272225341', 'Oncology', 134150.00);
+insert into `Doctor` (`lastname`, `firstname`, `street`, `suburb`, `city`, `phone`, `specialty`, `salary`) values ('Jones', 'William', '55 James Street', 'Fitzroy', 'Auckland', '0272123467', 'Cardiology', 133000.00);
+insert into `Doctor` (`lastname`, `firstname`, `street`, `suburb`, `city`, `phone`, `specialty`, `salary`) values ('Bonham', 'Frederick', '67 Arrow Street', 'Lynfield', 'Auckland', '0278811441', 'Critical Care', 120000.00);
+insert into `Doctor` (`lastname`, `firstname`, `street`, `suburb`, `city`, `phone`, `specialty`, `salary`) values ('Cornwell', 'Jean', '45 Moon Avenue', 'Avondale', 'Auckland', '0276688112', 'Dermatology', 133000.00);
+insert into `Doctor` (`lastname`, `firstname`, `street`, `suburb`, `city`, `phone`, `specialty`, `salary`) values ('Jones', 'Samantha', '25 Jade Lane', 'Glen Eden', 'Auckland', '0273434666', 'Cardiology ', 140000.00);
+
+insert into `Researchtopic` (`description`, `level`) values ('Addictions', 4);
+insert into `Researchtopic` (`description`, `level`) values ('Pandemics', 5);
+insert into `Researchtopic` (`description`, `level`) values ('Allergies', 1);
+insert into `Researchtopic` (`description`, `level`) values ('Diabetes', 5);
+insert into `Researchtopic` (`description`, `level`) values ('Pain and pain relief', 3);
+insert into `Researchtopic` (`description`, `level`) values ('Cardiovascular', 7);
+insert into `Researchtopic` (`description`, `level`) values ('Viral oncology', 4);
+insert into `Researchtopic` (`description`, `level`) values ('Lymphoma', 2);
+
+insert into `Medication` (`name`, `cost`) values ('Ibuprofen 200mg', 6.00);
+insert into `Medication` (`name`, `cost`) values ('Paracetamol 200mg', 6.50);
+insert into `Medication` (`name`, `cost`) values ('Prochlorperazine maleate 5mg', 5.00);
+insert into `Medication` (`name`, `cost`) values ('Aspirin 200mg', 4.50);
+insert into `Medication` (`name`, `cost`) values ('Eye Drops', 5.50);
+insert into `Medication` (`name`, `cost`) values ('Ear Drops', 7.50);
+insert into `Medication` (`name`, `cost`) values ('Nasal Spray', 4.50);
+insert into `Medication` (`name`, `cost`) values ('Codeine 200mg', 7.50);
+
+insert into `Admission` (`description`, `admissiondate`, `status`, `patientID`, `wardID`) values ('chest pain', '2020-03-06', 'complete', 4, 10);
+insert into `Admission` (`description`, `admissiondate`, `status`, `patientID`, `wardID`) values ('head trauma', '2020-04-03', 'current', 7, 12);
+
+insert into `Prescription` (`prescriptiondate`, `amount`, `medicationID`, `admissionID`) values ('2020-03-06', 5.00, 8, 1);
+insert into `Prescription` (`prescriptiondate`, `amount`, `medicationID`, `admissionID`) values ('2020-03-07', 6.50, 7, 1);
+insert into `Prescription` (`prescriptiondate`, `amount`, `medicationID`, `admissionID`) values ('2020-04-13', 6.50, 7, 2);
+
+insert into `Allocation` (`fee`, `role`, `doctorID`, `admissionID`) values (75.00, 'primary', 35, 1);
+insert into `Allocation` (`fee`, `role`, `doctorID`, `admissionID`) values (50.00, 'primary', 36, 2);
+insert into `Allocation` (`fee`, `role`, `doctorID`, `admissionID`) values (25.00, 'secondary', 42, 2);
+
+insert into `Payment` (`paymentdate`, `amount`, `admissionID`) values ('2020-03-08', 20.00, 1);
+insert into `Payment` (`paymentdate`, `amount`, `admissionID`) values ('2020-03-17', 25.00, 1);
+
+insert into `Researchproject` (`enddate`, `outcome`, `budget`, `doctorID`, `topicID`) values ('2020-06-01', 'journal article', 2000.00, 35, 5);
+insert into `Researchproject` (`enddate`, `outcome`, `budget`, `doctorID`, `topicID`) values ('2020-06-02', 'book chapter', 5000.00, 36, 7);
+insert into `Researchproject` (`enddate`, `outcome`, `budget`, `doctorID`, `topicID`) values ('2020-06-03', 'conference paper', 3500.00, 37, 8);
+
+
+
+
+
+
+
+
