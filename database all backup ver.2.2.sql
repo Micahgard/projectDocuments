@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: ocvwlym0zv3tcn68.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
--- Generation Time: Jun 18, 2020 at 02:21 AM
+-- Generation Time: Jun 24, 2020 at 08:14 AM
 -- Server version: 5.7.23-log
 -- PHP Version: 7.4.5
 
@@ -72,14 +72,16 @@ INSERT INTO `Admission` (`AdmissionID`, `description`, `admissiondate`, `status`
 (1, 'chest pain', '2020-03-06', 'complete', 4, 10),
 (2, 'head trauma', '2020-04-03', 'complete', 7, 12),
 (6, 'heart murmur', '2020-05-03', 'complete', 11, 16),
-(7, 'chest pain', '2020-06-09', 'current', 9, 14),
+(7, 'severe chest pain', '2020-06-10', 'current', 9, 14),
 (8, 'headache', '2020-06-12', 'current', 15, 13),
 (9, 'eyes', '2020-05-13', 'billed', 8, 14),
-(10, 'ears', '2019-05-14', 'billed', 15, 16),
+(10, 'ears', '2020-05-14', 'billed', 15, 16),
 (11, 'nose', '2020-05-15', 'billed', 4, 11),
 (12, 'legs pain', '2020-01-01', 'close', 13, 11),
-(13, 'legs pain', '2020-01-02', 'close', 12, 13),
-(14, 'legs pain', '2020-01-03', 'close', 11, 14);
+(13, 'arms pain', '2020-01-02', 'close', 12, 13),
+(15, 'dizzy', '2020-06-30', 'current', 4, 13),
+(16, 'nose', '2020-06-20', 'billed', 15, 12),
+(17, 'ass pain', '2020-06-01', 'close', 14, 14);
 
 --
 -- Triggers `Admission`
@@ -137,7 +139,10 @@ INSERT INTO `Allocation` (`AllocationID`, `fee`, `role`, `doctorID`, `admissionI
 (11, '150.00', 'primary', 37, 6),
 (12, '100.00', 'secondary', 39, 6),
 (13, '40.00', 'primary', 41, 9),
-(14, '40.00', 'primary', 41, 11);
+(14, '40.00', 'primary', 41, 11),
+(15, '60.00', 'Primary', 36, 7),
+(16, '32.00', 'secondary', 37, 7),
+(19, '18.00', 'secondary', 41, 7);
 
 --
 -- Triggers `Allocation`
@@ -201,7 +206,18 @@ INSERT INTO `Doctor` (`DoctorID`, `lastname`, `firstname`, `street`, `suburb`, `
 (40, 'Bonham', 'Frederick', '67 Arrow Street', 'Lynfield', 'Auckland', '0278811441', 'Critical Care', '120000.00'),
 (41, 'Cornwell', 'Jean', '45 Moon Avenue', 'Avondale', 'Auckland', '0276688112', 'Dermatology', '133000.00'),
 (42, 'Jones', 'Samantha', '25 Jade Lane', 'Glen Eden', 'Auckland', '0273434666', 'Cardiology ', '140000.00'),
-(44, 'King', 'Bill', '54 avon street', 'mt Albert', 'Auckland', '', 'Haematology', '122400.00');
+(44, 'King', 'Bill', '54 Avon street', 'mt Albert', 'Auckland', '', 'Haematology', '122400.00'),
+(49, 'James', 'Grey', '44 One Tree Road', 'New Lynn', 'Auckland', '0220272288', 'Neurology', '102500.00'),
+(51, 'Dom', 'Tom', '231 Pasdel Road', 'Mt Albert', 'Auckland', '', 'Pathology', '100000.00'),
+(62, 'Dom', 'Tom', '231 Pasdel Road', 'Mt Albert', 'Auckland', '', 'Pathology', '100000.00'),
+(63, 'Dom', 'Tom', '231 Pasdel Road', 'Mt Albert', 'Auckland', '', 'Pathology', '100000.00'),
+(65, 'Dom', 'Tom', '231 Pasdel Road', 'Mt Albert', 'Auckland', '', 'Pathology', '100000.00'),
+(66, 'Dom', 'Tom', '231 Pasdel Road', 'Mt Albert', 'Auckland', '', 'Pathology', '100000.00'),
+(67, 'Dom', 'Tom', '231 Pasdel Road', 'Mt Albert', 'Auckland', '', 'Pathology', '100000.00'),
+(68, 'Dom', 'Tom', '231 Pasdel Road', 'Mt Albert', 'Auckland', '', 'Pathology', '100000.00'),
+(69, 'Dom', 'Tom', '231 Pasdel Road', 'Mt Albert', 'Auckland', '', 'Pathology', '100000.00'),
+(70, 'Dom', 'Tom', '231 Pasdel Road', 'Mt Albert', 'Auckland', '', 'Pathology', '100000.00'),
+(71, 'Dom', 'Tom', '231 Pasdel Road', 'Mt Albert', 'Auckland', '', 'Pathology', '100000.00');
 
 --
 -- Triggers `Doctor`
@@ -287,18 +303,20 @@ CREATE TABLE `Medication` (
 --
 
 INSERT INTO `Medication` (`MedicationID`, `name`, `cost`) VALUES
-(2, 'medication102', '500.00'),
-(3, 'medication1', '100.00'),
-(4, 'medication2', '1000.00'),
-(6, 'Ibuprofen 200mg', '6.00'),
-(7, 'Paracetamol 200mg', '7.70'),
-(8, 'Prochlorperazine maleate 5mg', '8.80'),
-(9, 'Aspirin 200mg', '9.90'),
+(2, 'secret002', '500.00'),
+(3, 'secret003', '100.00'),
+(6, 'Ibuprofen (200mg)', '6.00'),
+(7, 'Paracetamol (200mg)', '7.70'),
+(8, 'Prochlorperazine maleate (5mg)', '8.80'),
+(9, 'Aspirin (200mg)', '9.90'),
 (10, 'Eye Drops', '5.50'),
 (11, 'Ear Drops', '7.50'),
 (12, 'Nasal Spray', '4.50'),
-(13, 'Codeine 200mg', '7.50'),
-(14, 'VitaminC', '20.00');
+(13, 'Codeine (200mg)', '7.50'),
+(14, 'VitaminC', '20.00'),
+(16, 'Aludrox (840mg) Tablet', '0.25'),
+(17, 'Drovera (40mg) Injection', '10.00'),
+(18, 'Spasmopriv (100mg) Capsule', '7.50');
 
 --
 -- Triggers `Medication`
@@ -354,8 +372,8 @@ CREATE TABLE `Patient` (
 --
 
 INSERT INTO `Patient` (`PatientID`, `lastname`, `firstname`, `street`, `suburb`, `city`, `email`, `phone`, `insurcode`) VALUES
-(4, 'Fane', 'Andrew', '12 Queen Street', 'Mt Albert', 'Auckland', 'andrewfane@xtra.co.nz', '0211131122', 'ASB3432'),
-(5, 'Burke', 'Andrew', '34 Jade Street', 'Glen Eden', 'Auckland', 'andrewburke@xtra.co.nz', '0211114122', 'ASB5687'),
+(4, 'Schwarzer', 'Hans', '250 Chapel Road', 'Flat Bush', 'Auckland', 'hanschwarzer@gmail.com', '0223324456', ''),
+(5, 'Liu', 'Andrew', '34 Jade Street', 'Glen Eden', 'Auckland', 'andrewburke@xtra.co.nz', '0211114122', 'ASB5687'),
 (6, 'Ripley', 'Ellen', '45 Reeves Lane', 'Glen Eden', 'Auckland', 'ellenripley@xtra.co.nz', '0211121122', 'NZB6521'),
 (7, 'Shames', 'Ian', '52 Green Lane', 'Mt Roskill', 'Auckland', 'ianshames@xtra.co.nz', '0211221122', 'TSB4576'),
 (8, 'King', 'Sarah', '14 Roper Street', 'Avondale', 'Auckland', 'sarahking@xtra.co.nz', '0211114122', 'ASB6515'),
@@ -366,7 +384,8 @@ INSERT INTO `Patient` (`PatientID`, `lastname`, `firstname`, `street`, `suburb`,
 (13, 'King', 'Peter', '120 Queen ST', 'CBD', 'Auckland', 'peterking@gmail.com', '0212223333', 'ASB1234'),
 (14, 'Li', 'Henry', '123 Queen ST', 'CBD', 'Auckland', 'henryli@gmail.com', '0223345567', ''),
 (15, 'Lin', 'Joel', '124 Daasdc Road', 'Henderson', 'Auckland', 'lin@nzal.com', '012345345', ''),
-(16, 'Gardner', 'Micah', '42 Summer', 'ponsonby', 'auckland', 'abc@gmail.com', '0201234567', '12345');
+(16, 'Gardner', 'Micah', '42 Summer', 'ponsonby', 'auckland', 'abc@gmail.com', '0201234567', '12345'),
+(18, 'for testing', 'for test test', '1234 queen st', 'CBD', 'Auckland', 'henryli@gmail.com', '0212223333', '');
 
 --
 -- Triggers `Patient`
@@ -458,7 +477,10 @@ INSERT INTO `Payment` (`PaymentCode`, `paymentdate`, `amount`, `admissionID`) VA
 (4, '2020-05-08', '60.50', 6),
 (5, '2020-05-23', '40.00', 9),
 (6, '2020-05-24', '23.00', 10),
-(7, '2020-05-25', '38.50', 11);
+(7, '2020-05-25', '38.50', 11),
+(8, '2020-06-24', '1.00', 16),
+(9, '2020-06-24', '2.00', 16),
+(10, '2020-06-04', '100.00', 17);
 
 --
 -- Triggers `Payment`
@@ -516,7 +538,11 @@ INSERT INTO `Prescription` (`PrescriptionID`, `prescriptiondate`, `amount`, `adm
 (5, '2020-05-12', '7.00', 6, 6),
 (6, '2020-06-10', '6.00', 6, 14),
 (7, '2020-06-18', '2.00', 9, 10),
-(8, '2020-06-18', '3.00', 10, 11);
+(8, '2020-06-18', '3.00', 10, 11),
+(9, '2020-06-21', '2.00', 15, 14),
+(10, '2020-06-21', '1.50', 15, 16),
+(11, '2020-06-23', '2.50', 15, 9),
+(12, '2020-06-23', '1.50', 15, 12);
 
 --
 -- Triggers `Prescription`
@@ -829,43 +855,43 @@ ALTER TABLE `Admin`
 -- AUTO_INCREMENT for table `Admission`
 --
 ALTER TABLE `Admission`
-  MODIFY `AdmissionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `AdmissionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `Allocation`
 --
 ALTER TABLE `Allocation`
-  MODIFY `AllocationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `AllocationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `Doctor`
 --
 ALTER TABLE `Doctor`
-  MODIFY `DoctorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `DoctorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `Medication`
 --
 ALTER TABLE `Medication`
-  MODIFY `MedicationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `MedicationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `Patient`
 --
 ALTER TABLE `Patient`
-  MODIFY `PatientID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `PatientID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `Payment`
 --
 ALTER TABLE `Payment`
-  MODIFY `PaymentCode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `PaymentCode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `Prescription`
 --
 ALTER TABLE `Prescription`
-  MODIFY `PrescriptionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `PrescriptionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `Researchproject`
@@ -883,7 +909,7 @@ ALTER TABLE `Researchtopic`
 -- AUTO_INCREMENT for table `Ward`
 --
 ALTER TABLE `Ward`
-  MODIFY `WardID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `WardID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
